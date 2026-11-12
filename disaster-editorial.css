@@ -1,0 +1,216 @@
+/* Page-specific compositions; the shared research styles own section type,
+   spacing, metrics, and the 1080px editorial grid. */
+html.research-page[data-project="disaster-reconnaissance"] {
+  color-scheme: light;
+  background: #fff;
+  color: #222426;
+}
+html[data-project="disaster-reconnaissance"] body { background: #fff; }
+.disaster-page { --disaster-gutter: clamp(20px, 4vw, 48px); }
+.disaster-page :is(h1, p, figure, dl, dd) { margin: 0; }
+.disaster-page figure, .disaster-page details { min-width: 0; }
+.disaster-page a { color: #285fb5; text-underline-offset: 3px; }
+.disaster-page :focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+.disaster-page button { cursor: pointer; }
+.disaster-page .rp-section :is(figcaption, .figure-notes) { color: var(--rp-muted); }
+
+/* Flow layout keeps the lower-left copy inside the Hero even on short screens.
+   The original footage, poster, navigation and playback controller are retained. */
+html.research-page .disaster-hero {
+  --hero-gutter: clamp(24px, 4vw, 72px);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: #182322;
+  color: #fff;
+}
+.disaster-hero video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.disaster-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse max(900px, 75vw) max(620px, 75svh) at left bottom,
+                #071512eb, #071512ad 50%, transparent 100%),
+              linear-gradient(#07151266, transparent 100px);
+}
+.disaster-hero :is(.project-navigation, .disaster-hero-copy) {
+  position: relative;
+  z-index: 1;
+  width: calc(100% - 2 * var(--hero-gutter));
+  margin-inline: var(--hero-gutter);
+}
+.disaster-hero .project-navigation { padding-block: 24px; font-size: 14px; }
+.disaster-hero .project-navigation a { color: #fff; text-decoration: none; text-shadow: 0 1px 8px #0008; }
+.disaster-hero .project-navigation a:hover { text-decoration: underline; }
+.disaster-hero .disaster-hero-copy {
+  margin-top: auto;
+  padding-top: clamp(96px, 16svh, 180px);
+  padding-bottom: clamp(88px, 10svh, 120px);
+  font-family: "IBM Plex Sans Variable", sans-serif;
+  text-shadow: none;
+}
+html.research-page .disaster-hero h1 {
+  max-width: 720px;
+  color: #F5F7F6;
+  font-size: clamp(32px, calc(24px + 2vw), 56px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -.025em;
+  text-align: left;
+  text-wrap: wrap;
+}
+.disaster-hero h1 span { display: block; }
+.disaster-hero .disaster-hero-subtitle {
+  max-width: 600px;
+  margin-top: 20px;
+  color: #D5E1E5;
+  font-size: clamp(18px, calc(16px + .35vw), 22px);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: normal;
+  text-wrap: balance;
+}
+.disaster-hero .disaster-hero-description {
+  max-width: 60ch;
+  margin-top: 14px;
+  color: #C4CFD3;
+  font-size: clamp(15px, calc(14px + .2vw), 17px);
+  font-weight: 400;
+  line-height: 1.6;
+}
+.disaster-hero .motion-toggle {
+  position: absolute;
+  right: var(--hero-gutter);
+  bottom: 24px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #ffffff70;
+  border-radius: 50%;
+  background: #07151266;
+  color: #fff;
+}
+.motion-toggle .play-icon, .motion-toggle.is-paused .pause-icon { display: none; }
+.motion-toggle.is-paused .play-icon { display: block; }
+
+.disaster-problem-grid, .disaster-mapping-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(28px, 4vw, 56px);
+}
+.disaster-page .disaster-problem-grid .rp-section-heading { margin: 0; }
+html[data-project="disaster-reconnaissance"] .problem-figure { width: 100%; margin: 0; }
+.disaster-page .problem-figure img { width: 100%; height: auto; }
+.disaster-damage-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--rp-grid-gap);
+  margin-top: 28px;
+}
+.disaster-damage-stage { aspect-ratio: 4 / 3; }
+html.research-page .disaster-damage-stage img { width: 100%; height: 100%; object-fit: contain; }
+.disaster-damage-explorer { margin-top: 28px; border-block: 1px solid var(--rp-divider); }
+.disaster-damage-explorer summary { padding-block: 16px; color: var(--rp-muted); font-size: 14px; cursor: pointer; }
+html[data-project="disaster-reconnaissance"] .damage-selector { width: min(100%, 600px); margin: 12px auto 28px; }
+.damage-selected-label { display: block; margin-bottom: 16px; font-size: 17px; font-weight: 500; }
+.damage-photo-stage { width: 100%; aspect-ratio: 3 / 2; }
+html.research-page .damage-photo-stage img { width: 100%; height: 100%; object-fit: contain; }
+.disaster-page .rp-section .damage-gallery-reference { font-size: 14px; color: var(--rp-muted); }
+.damage-selector-controls { margin-top: 20px; }
+.damage-range-label { display: block; color: var(--rp-muted); font-size: 14px; }
+.damage-selector input[type="range"] { display: block; width: 100%; height: 44px; margin: 0; padding: 0; accent-color: #27272a; cursor: pointer; touch-action: pan-y; }
+.damage-stop-labels { display: flex; justify-content: space-between; gap: 4px; color: var(--rp-muted); font-size: 11px; }
+.damage-stop-labels span { display: flex; justify-content: center; width: 0; white-space: nowrap; }
+.damage-stop-labels span:first-child { justify-content: flex-start; }
+.damage-stop-labels span:last-child { justify-content: flex-end; }
+.damage-step-controls { display: flex; justify-content: space-between; gap: 16px; margin-top: 20px; }
+.damage-step-controls button { min-height: 44px; padding: 6px 12px; border: 1px solid var(--rp-divider); border-radius: 4px; background: #fff; color: var(--rp-text); font: inherit; font-size: 14px; }
+.damage-step-controls button:hover:not(:disabled) { background: #f5f5f5; }
+.damage-step-controls button:disabled { opacity: .4; cursor: default; }
+.disaster-page .rp-section .damage-selector-fallback { font-size: 14px; }
+
+.disaster-mapping-grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); }
+/* Keep the original comparison registration, including the source-map offsets. */
+.disaster-page .damage-comparison { width: 100%; max-width: 544px; margin: 0; }
+.map-stage { position: relative; aspect-ratio: 1446 / 1894; overflow: hidden; background: #eee; border: 1px solid #d4d4d8; }
+html.research-page .map-stage img { display: block; max-width: none; max-height: none; margin: 0; pointer-events: none; user-select: none; }
+.map-before { width: 100%; height: auto; }
+.map-after-clip { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--split)); }
+html.research-page .map-stage .map-after { position: absolute; width: 102.254%; height: auto; left: -2.268%; top: -.467%; }
+.map-label { position: absolute; top: 12px; z-index: 1; padding: 3px 10px; border-radius: 3px; background: #fffffff5; color: #27272a; font-size: 12px; pointer-events: none; }
+.map-label-before { left: 12px; }
+.map-label-after { right: 12px; }
+.map-divider { position: absolute; top: 0; bottom: 0; left: var(--split); width: 2px; transform: translateX(-50%); background: #fff; box-shadow: 0 0 4px #111; pointer-events: none; }
+.map-divider > span { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #fff; color: #333; font-size: 24px; box-shadow: 0 1px 8px #444; }
+.map-stage input[type="range"] { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; margin: 0; padding: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
+.map-stage:focus-within { outline: 2px solid #285fb5; outline-offset: 4px; }
+.disaster-map-result dl { display: flex; flex-direction: column; gap: 12px; }
+.disaster-map-result dt { max-width: 300px; color: var(--rp-muted); font-size: 17px; line-height: 1.5; }
+.disaster-map-result dd { order: -1; color: var(--rp-text); font-size: clamp(48px, 5vw, 64px); font-weight: 650; font-variant-numeric: tabular-nums; line-height: 1; letter-spacing: -.035em; }
+.disaster-page .rp-section .disaster-map-result p { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--rp-divider); color: var(--rp-muted); font-size: 14px; line-height: 1.6; }
+
+html[data-project="disaster-reconnaissance"] .mission-planning { width: 100%; margin: 0; }
+.mission-tabs { display: flex; gap: clamp(8px, 2vw, 24px); border-bottom: 1px solid var(--rp-divider); }
+.mission-tabs button { min-width: 0; min-height: 44px; padding: 12px 0; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--rp-muted); font: inherit; font-size: 15px; line-height: 1.4; }
+.mission-tabs button[aria-selected="true"] { border-bottom-color: var(--rp-text); color: var(--rp-text); font-weight: 600; }
+.mission-tabs button:hover { color: var(--rp-text); }
+.mission-panel { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: center; gap: clamp(28px, 4vw, 56px); padding-top: 28px; }
+html.research-page .mission-panel img { display: block; width: min(100%, 440px); height: auto; margin-inline: auto; object-fit: contain; }
+.mission-parameters { display: grid; gap: 0; }
+.mission-parameters > div { padding-block: 20px; border-top: 1px solid var(--rp-divider); }
+.mission-parameters dt { color: var(--rp-muted); font-size: 14px; }
+.mission-parameters dd { margin-top: 6px; color: var(--rp-text); font-size: 24px; font-weight: 500; line-height: 1.3; }
+.disaster-page .rp-section .mission-caption { margin-top: 20px; color: var(--rp-muted); font-size: 14px; line-height: 1.5; }
+.disaster-page .rp-section .disaster-evaluation { max-width: none; margin-top: 12px; font-size: 14px; line-height: 1.6; }
+.disaster-page .scenario-fallback { grid-column: 1 / -1; }
+.disaster-page .conclusion .rp-section-heading { max-width: 900px; margin: 0; }
+
+/* Compact bibliography follows the shared editorial boundary and body font. */
+html.research-page .disaster-page .research-section.publications { padding-block: 28px; border-top: 1px solid var(--rp-divider); }
+.disaster-page .rp-section.publications h2 { margin-bottom: 20px; font-size: 20px; line-height: 1.4; letter-spacing: -.02em; }
+.disaster-page .publications .citation + .citation { margin-top: 20px; }
+.disaster-page .publications .citation h3 { margin: 0 0 6px; font-size: 14px; font-weight: 600; line-height: 1.5; }
+.disaster-page .publications .citation p { max-width: 900px; color: var(--rp-muted); font-size: 14px; line-height: 1.7; }
+.disaster-page .citation a { overflow-wrap: anywhere; }
+html[data-project="disaster-reconnaissance"] footer { width: min(1080px, calc(100% - 2 * clamp(20px, 4vw, 48px))); color: #525451; text-align: left; }
+html[data-project="disaster-reconnaissance"] footer p { margin: 0; font-size: 12px; }
+html[data-project="disaster-reconnaissance"] footer a { color: inherit; }
+
+@media (max-width: 999px) {
+  .disaster-problem-grid, .disaster-mapping-grid { grid-template-columns: minmax(0, 1fr); }
+  html[data-project="disaster-reconnaissance"] .problem-figure { max-width: 565px; margin-inline: 0; }
+  .disaster-page .damage-comparison { margin-inline: auto; }
+  .disaster-map-result { max-width: 544px; width: 100%; margin-inline: auto; }
+}
+@media (max-width: 767px) {
+  .disaster-hero h1 span { display: inline; }
+  .mission-panel { grid-template-columns: minmax(0, 1fr); }
+  .mission-parameters { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .mission-parameters dd { font-size: 19px; }
+}
+@media (max-width: 600px) {
+  .disaster-damage-gallery { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .mission-tabs { gap: 16px; }
+  .mission-tabs button { flex: 1; font-size: 14px; }
+  .mission-parameters { grid-template-columns: minmax(0, 1fr); }
+  .mission-parameters > div { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-block: 14px; }
+  .mission-parameters dd { margin: 0; }
+}
+@media (max-width: 400px) {
+  .damage-stop-labels span:not(:first-child):not(:last-child) { visibility: hidden; }
+}
